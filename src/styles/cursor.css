@@ -1,0 +1,98 @@
+/* ==========================================================================
+   CUSTOM CURSOR
+   A terminal block-cursor: solid square dot + a thin tracking ring, with a
+   fading "signal" trail. Morphs into brackets [ ] over interactive elements
+   and a blinking I-beam over text. Hidden entirely on touch devices and
+   when reduced motion is requested.
+   ========================================================================== */
+@media (hover: hover) and (pointer: fine) {
+  body.custom-cursor-active,
+  body.custom-cursor-active * {
+    cursor: none !important;
+  }
+}
+
+.cursor-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background: var(--accent-cyan);
+  border-radius: 1px;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  box-shadow: 0 0 6px var(--accent-cyan);
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--accent-cyan);
+  border-radius: 4px;
+  transform: translate(-50%, -50%);
+  will-change: transform, width, height, border-radius, opacity;
+  transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              border-radius 0.2s ease,
+              border-color 0.2s ease,
+              opacity 0.2s ease;
+  opacity: 0.55;
+}
+
+/* Hover state: over links, buttons, cards -> expands into a bracket-select box */
+.cursor-ring.is-pointer {
+  width: 56px;
+  height: 56px;
+  border-color: var(--accent-amber);
+  border-radius: 4px;
+  border-style: dashed;
+  opacity: 0.8;
+}
+.cursor-dot.is-pointer {
+  background: var(--accent-amber);
+  box-shadow: 0 0 8px var(--accent-amber);
+}
+
+/* Text hover state: thin blinking I-beam instead of block */
+.cursor-dot.is-text {
+  width: 2px;
+  height: 18px;
+  border-radius: 1px;
+  animation: cursor-blink 1s step-end infinite;
+}
+.cursor-ring.is-text {
+  opacity: 0;
+}
+
+@keyframes cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* Trailing signal pings */
+.cursor-trail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  background: var(--accent-cyan);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+  pointer-events: none;
+}
