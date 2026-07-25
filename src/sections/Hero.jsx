@@ -149,6 +149,47 @@ export default function Hero({ profile }) {
                   </div>
                 )}
 
+                {finished && (profile?.githubUrl || profile?.linkedinUrl || profile?.resumeUrl) && (
+              <div className="hero-social">
+                {profile?.githubUrl && (
+                  <a
+                    href={profile.githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hero-social-link"
+                    data-cursor="pointer"
+                    aria-label="GitHub"
+                  >
+                    <Github size={17} />
+                  </a>
+                )}
+                {profile?.linkedinUrl && (
+                  <a
+                    href={profile.linkedinUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hero-social-link"
+                    data-cursor="pointer"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin size={17} />
+                  </a>
+                )}
+                {profile?.resumeUrl && (
+                  <a
+                    href={profile.resumeUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hero-social-link"
+                    data-cursor="pointer"
+                    aria-label="Resume"
+                  >
+                    <FileText size={17} />
+                  </a>
+                )}
+              </div>
+            )}
+
                 {finished && <span className="terminal-caret" aria-hidden="true" />}
               </div>
             </div>
