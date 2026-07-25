@@ -160,7 +160,7 @@ export default function Hero({ profile }) {
                     data-cursor="pointer"
                     aria-label="GitHub"
                   >
-                    <Github size={17} />
+                    <Github size={17} /> GitHub
                   </a>
                 )}
                 {profile?.linkedinUrl && (
@@ -172,7 +172,7 @@ export default function Hero({ profile }) {
                     data-cursor="pointer"
                     aria-label="LinkedIn"
                   >
-                    <Linkedin size={17} />
+                    <Linkedin size={17} /> LinkedIn
                   </a>
                 )}
                 {profile?.resumeUrl && (
@@ -184,11 +184,12 @@ export default function Hero({ profile }) {
                     data-cursor="pointer"
                     aria-label="Resume"
                   >
-                    <FileText size={17} />
+                    <FileText size={17} /> Resume
                   </a>
                 )}
               </div>
             )}
+            <br />
 
                 {finished && <span className="terminal-caret" aria-hidden="true" />}
               </div>
@@ -205,46 +206,7 @@ export default function Hero({ profile }) {
               </div>
             )}
 
-            {finished && (profile?.githubUrl || profile?.linkedinUrl || profile?.resumeUrl) && (
-              <div className="hero-social">
-                {profile?.githubUrl && (
-                  <a
-                    href={profile.githubUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hero-social-link"
-                    data-cursor="pointer"
-                    aria-label="GitHub"
-                  >
-                    <Github size={17} />
-                  </a>
-                )}
-                {profile?.linkedinUrl && (
-                  <a
-                    href={profile.linkedinUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hero-social-link"
-                    data-cursor="pointer"
-                    aria-label="LinkedIn"
-                  >
-                    <Linkedin size={17} />
-                  </a>
-                )}
-                {profile?.resumeUrl && (
-                  <a
-                    href={profile.resumeUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hero-social-link"
-                    data-cursor="pointer"
-                    aria-label="Resume"
-                  >
-                    <FileText size={17} />
-                  </a>
-                )}
-              </div>
-            )}
+           
           </div>
         </div>
       </div>
