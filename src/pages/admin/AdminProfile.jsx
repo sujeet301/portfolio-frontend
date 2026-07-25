@@ -4,6 +4,7 @@ import { profileApi } from '../../api/client';
 import Loader from '../../components/Loader';
 
 const EMPTY_EDU = { degree: '', institution: '', year: '', details: '' };
+const EMPTY_CERT = { title: '', issuer: '', date: '', url: '' };
 
 export default function AdminProfile() {
   const [form, setForm] = useState(null);
@@ -30,6 +31,7 @@ export default function AdminProfile() {
           resumeUrl: data.resumeUrl || '',
           profileImage: data.profileImage || '',
           education: data.education?.length ? data.education : [EMPTY_EDU],
+          certificates: data.certificates?.length ? data.certificates : [EMPTY_CERT],
           softSkills: (data.softSkills || []).join(', '),
           achievements: (data.achievements || []).join('\n'),
           languages: (data.languages || []).join(', '),
@@ -53,6 +55,18 @@ export default function AdminProfile() {
   const removeEdu = (index) =>
     setForm((f) => ({ ...f, education: f.education.filter((_, i) => i !== index) }));
 
+  const setCert = (index, key, value) => {
+    setForm((f) => {
+      const certificates = [...f.certificates];
+      certificates[index] = { ...certificates[index], [key]: value };
+      return { ...f, certificates };
+    });
+  };
+
+  const addCert = () => setForm((f) => ({ ...f, certificates: [...f.certificates, EMPTY_CERT] }));
+  const removeCert = (index) =>
+    setForm((f) => ({ ...f, certificates: f.certificates.filter((_, i) => i !== index) }));
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
@@ -64,6 +78,7 @@ export default function AdminProfile() {
         achievements: form.achievements.split('\n').map((s) => s.trim()).filter(Boolean),
         languages: form.languages.split(',').map((s) => s.trim()).filter(Boolean),
         education: form.education.filter((e) => e.degree || e.institution),
+        certificates: form.certificates.filter((c) => c.title || c.issuer),
       };
       await profileApi.update(payload);
       setSuccess('Profile saved');
@@ -206,6 +221,54 @@ export default function AdminProfile() {
           ))}
           <button type="button" className="btn btn-ghost btn-sm" onClick={addEdu}>
             <Plus size={13} /> Add education entry
+          </button>
+        </div>
+
+        <div className="panel" style={{ padding: 'var(--space-6)', marginBottom: 'var(--space-5)' }}>
+          <div className="admin-section-label">Certificates</div>
+          {form.certificates.map((cert, i) => (
+            <div className="repeatable-item" key={i}>
+              {form.certificates.length > 1 && (
+                <button type="button" className="repeatable-remove" onClick={() => removeCert(i)} aria-label="Remove certificate">
+                  <X size={14} />
+                </button>
+              )}
+              <div className="field-row">
+                <div className="field">
+                  <label>Title</label>
+                  <input
+                    value={cert.title}
+                    onChange={(e) => setCert(i, 'title', e.target.value)}
+                    placeholder="e.g. Full Stack Web Development"
+                  />
+                </div>
+                <div className="field">
+                  <label>Issuer</label>
+                  <input
+                    value={cert.issuer}
+                    onChange={(e) => setCert(i, 'issuer', e.target.value)}
+                    placeholder="e.g. Coursera"
+                  />
+                </div>
+              </div>
+              <div className="field-row">
+                <div className="field">
+                  <label>Date</label>
+                  <input value={cert.date} onChange={(e) => setCert(i, 'date', e.target.value)} placeholder="e.g. 2025" />
+                </div>
+                <div className="field">
+                  <label>Certificate URL</label>
+                  <input
+                    value={cert.url}
+                    onChange={(e) => setCert(i, 'url', e.target.value)}
+                    placeholder="https://... (link to view/verify)"
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+          <button type="button" className="btn btn-ghost btn-sm" onClick={addCert}>
+            <Plus size={13} /> Add certificate
           </button>
         </div>
 

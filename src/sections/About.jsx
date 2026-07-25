@@ -63,6 +63,33 @@ export default function About({ profile }) {
               </div>
             ))}
 
+            {profile?.certificates?.length > 0 && (
+              <div className="panel about-card">
+                <span className="about-card-label">Certificates</span>
+                {profile.certificates.map((cert, i) => (
+                  <div className="cert-item" key={i}>
+                    <div className="cert-item-top">
+                      <span className="cert-item-title">{cert.title}</span>
+                      {cert.url && (
+                        <a
+                          href={cert.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="cert-item-link"
+                          data-cursor="pointer"
+                        >
+                          View ↗
+                        </a>
+                      )}
+                    </div>
+                    <div className="cert-item-meta">
+                      {cert.issuer} {cert.date ? `— ${cert.date}` : ''}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
             {profile?.languages?.length > 0 && (
               <div className="panel about-card">
                 <span className="about-card-label">Languages</span>
