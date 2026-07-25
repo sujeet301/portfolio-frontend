@@ -27,6 +27,7 @@ export default function AdminProfile() {
           location: data.location || '',
           githubUrl: data.githubUrl || '',
           linkedinUrl: data.linkedinUrl || '',
+          leetcodeUrl: data.leetcodeUrl || '',
           portfolioUrl: data.portfolioUrl || '',
           resumeUrl: data.resumeUrl || '',
           profileImage: data.profileImage || '',
@@ -180,9 +181,15 @@ export default function AdminProfile() {
           </div>
           <div className="field-row">
             <div className="field">
+              <label>LeetCode URL</label>
+              <input value={form.leetcodeUrl} onChange={(e) => set('leetcodeUrl', e.target.value)} placeholder="https://leetcode.com/u/..." />
+            </div>
+            <div className="field">
               <label>Portfolio URL</label>
               <input value={form.portfolioUrl} onChange={(e) => set('portfolioUrl', e.target.value)} />
             </div>
+          </div>
+          <div className="field-row">
             <div className="field">
               <label>Resume URL</label>
               <input value={form.resumeUrl} onChange={(e) => set('resumeUrl', e.target.value)} />
