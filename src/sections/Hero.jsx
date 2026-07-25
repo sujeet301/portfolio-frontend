@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowDown, Mail } from 'lucide-react';
+import { ArrowDown, Mail, Github, Linkedin, FileText } from 'lucide-react';
 
 const TYPE_SPEED = 55;
 
@@ -161,6 +161,47 @@ export default function Hero({ profile }) {
                 <a href="#contact" className="btn btn-ghost" data-cursor="pointer">
                   <Mail size={15} /> Get in Touch
                 </a>
+              </div>
+            )}
+
+            {finished && (profile?.githubUrl || profile?.linkedinUrl || profile?.resumeUrl) && (
+              <div className="hero-social">
+                {profile?.githubUrl && (
+                  <a
+                    href={profile.githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hero-social-link"
+                    data-cursor="pointer"
+                    aria-label="GitHub"
+                  >
+                    <Github size={17} />
+                  </a>
+                )}
+                {profile?.linkedinUrl && (
+                  <a
+                    href={profile.linkedinUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hero-social-link"
+                    data-cursor="pointer"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin size={17} />
+                  </a>
+                )}
+                {profile?.resumeUrl && (
+                  <a
+                    href={profile.resumeUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hero-social-link"
+                    data-cursor="pointer"
+                    aria-label="Resume"
+                  >
+                    <FileText size={17} />
+                  </a>
+                )}
               </div>
             )}
           </div>
