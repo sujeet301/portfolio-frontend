@@ -6,6 +6,7 @@ import './styles/globals.css';
 import './styles/cursor.css';
 import './styles/sections.css';
 import './styles/admin.css';
+import './styles/chat.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

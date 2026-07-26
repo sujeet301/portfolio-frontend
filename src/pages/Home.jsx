@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Loader from '../components/Loader';
+import ChatWidget from '../components/ChatWidget';
 import Hero from '../sections/Hero';
 import About from '../sections/About';
 import Skills from '../sections/Skills';
@@ -71,6 +72,7 @@ export default function Home() {
       <Projects projects={projects} />
       <Contact profile={profile} />
       <Footer profile={profile} />
+      <ChatWidget />
     </>
   );
 }

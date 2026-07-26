@@ -81,6 +81,7 @@
 
 .hero-cta {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-4);
   margin-top: var(--space-7);
   opacity: 0;
@@ -94,22 +95,26 @@
 
 .hero-social {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-3);
   margin-top: var(--space-5);
+  max-width: 100%;
   opacity: 0;
   transform: translateY(12px);
   animation: rise-in 0.6s ease forwards;
   animation-delay: 2.8s;
 }
 .hero-social-link {
-  
-  padding: 12px 20px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 7px;
+  padding: 9px 14px;
   border: 1px solid var(--border-hair-bright);
   border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
   color: var(--text-muted);
+  white-space: nowrap;
   transition: border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
 }
 .hero-social-link:hover {
@@ -117,6 +122,11 @@
   color: var(--accent-cyan);
   transform: translateY(-2px);
 }
+@media (max-width: 480px) {
+  .hero-social { gap: var(--space-2); }
+  .hero-social-link { padding: 8px 11px; font-size: 12px; }
+}
+
 /* Hero layout: framed photo + terminal side by side */
 .hero-grid {
   display: grid;
