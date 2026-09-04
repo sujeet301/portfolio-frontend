@@ -11,7 +11,7 @@ export function AuthProvider({ children }) {
     try {
       const res = await authApi.me();
       setAdmin(res.data.admin);
-    } catch {
+    } catch (error) {
       if (error.response?.status === 401) {
         // User is simply not logged in
         setAdmin(null);
