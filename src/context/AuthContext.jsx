@@ -8,19 +8,23 @@ export function AuthProvider({ children }) {
   const [checking, setChecking] = useState(true);
 
   const checkAuth = useCallback(async () => {
-    try {
-      const res = await authApi.me();
-      setAdmin(res.data.admin);
-    } catch (error) {
-      if (error.response?.status === 401) {
-        console.error('Auth check failed:', error);
-      }
-
+  try {
+    const res = await authApi.me();
+    setAdmin(res.data.admin);
+  } catch (error) {
+    if (error.response?.status === 401) {
+      // User is not logged in — this is expected
       setAdmin(null);
-    } finally {
-      setChecking(false);
+      console.error('Auth check failed:', error);
+    } else {
+      // Real error
+      console.error('Auth check failed:', error);
+      setAdmin(null);
     }
-  }, []);
+  } finally {
+    setChecking(false);
+  }
+}, []);
 
   useEffect(() => {
     checkAuth();
