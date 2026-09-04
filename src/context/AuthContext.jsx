@@ -12,7 +12,14 @@ export function AuthProvider({ children }) {
       const res = await authApi.me();
       setAdmin(res.data.admin);
     } catch {
-      setAdmin(null);
+      if (error.response?.status === 401) {
+        // User is simply not logged in
+        setAdmin(null);
+      } else {
+        // Real unexpected error
+        console.error('Auth check failed:', error);
+        setAdmin(null);
+      }
     } finally {
       setChecking(false);
     }
