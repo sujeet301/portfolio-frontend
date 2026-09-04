@@ -63,29 +63,29 @@ api.interceptors.response.use(
 
 // ---- Auth ----
 export const authApi = {
-  login: (email, password) => api.post('/api/auth/login', { email, password }),
-  logout: () => api.post('/api/auth/logout'),
-  me: () => api.get('/api/auth/me'),
+  login: (email, password) => api.post('/auth/login', { email, password }),
+  logout: () => api.post('/auth/logout'),
+  me: () => api.get('/auth/me'),
 };
 
 // ---- Skills ----
 export const skillsApi = {
-  list: () => api.get('/api/skills'),
-  create: (data) => api.post('/api/skills', data),
-  update: (id, data) => api.put(`/api/skills/${id}`, data),
-  remove: (id) => api.delete(`/api/skills/${id}`),
+  list: () => api.get('/skills'),
+  create: (data) => api.post('/skills', data),
+  update: (id, data) => api.put(`/skills/${id}`, data),
+  remove: (id) => api.delete(`/skills/${id}`),
 };
 
 // ---- Projects ----
 export const projectsApi = {
-  list: () => api.get('/api/projects'),
-  create: (data) => api.post('/api/projects', data),
-  update: (id, data) => api.put(`/api/projects/${id}`, data),
-  remove: (id) => api.delete(`/api/projects/${id}`),
+  list: () => api.get('/projects'),
+  create: (data) => api.post('/projects', data),
+  update: (id, data) => api.put(`/projects/${id}`, data),
+  remove: (id) => api.delete(`/projects/${id}`),
 };
 
 // ---- Profile ----
 export const profileApi = {
-  get: () => api.get('/api/profile'),
-  update: (data) => api.put('/api/profile', data),
+  get: () => api.get('/profile'),
+  update: (data) => api.put('/profile', data),
 };
